@@ -8,7 +8,7 @@ from rest_framework import status
 class CoinMarketList(APIView):
     def get(self, request):
         page = request.GET.get("page", 1)
-        per_page = request.GET.get("per_page", 10)
+        per_page = request.GET.get("per_page", 8)
         url = "https://api.coingecko.com/api/v3/coins/markets"
         params = {
             "vs_currency": "usd",

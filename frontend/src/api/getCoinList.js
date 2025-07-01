@@ -4,7 +4,7 @@ export default async function getCoinList(page = 1) {
   try {
     const response = await api.get(`/coins/markets`, {
       params: {
-        per_page: 10,
+        per_page: 8,
         page: page,
       },
     });
