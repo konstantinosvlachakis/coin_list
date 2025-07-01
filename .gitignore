@@ -1,0 +1,50 @@
+# Python / Django
+__pycache__/
+*.py[cod]
+*.sqlite3
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+*.env
+env/
+venv/
+ENV/
+.venv/
+.project/
+.DS_Store
+
+# Django migrations
+**/migrations/
+!*/migrations/__init__.py
+
+# VS Code settings
+.vscode/
+
+# React / Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+pnpm-lock.yaml
+
+# React build artifacts
+frontend/build/
+dist/
+
+# OS / Editor noise
+Thumbs.db
+.DS_Store
+.idea/
+*.swp
+
+# Git
+*.orig
+*.rej
+*.swo
+*.bak
+
+# Optional: skip compiled JS maps
+*.map

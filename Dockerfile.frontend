@@ -1,0 +1,22 @@
+# Dockerfile.frontend
+FROM node:18
+
+# Set work directory
+WORKDIR /app
+
+# Install dependencies
+COPY frontend/package*.json ./
+RUN npm install
+
+# Copy app files
+COPY frontend/ .
+
+# Build React
+RUN npm run build
+
+RUN apt-get update && apt-get install -y xsel
+
+# Serve with serve
+RUN npm install -g serve
+EXPOSE 3000
+CMD ["serve", "-s", "build", "-l", "3000"]
