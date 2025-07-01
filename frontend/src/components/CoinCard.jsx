@@ -1,24 +1,24 @@
 import { Link } from "react-router-dom";
-import {
-  Card,
-  CardContent,
-  Typography,
-  Box,
-  useTheme,
-} from "@mui/material";
+import { Card, CardContent, Typography, Box, useTheme } from "@mui/material";
 
+/** CoinCard component displays individual coin information */
 export default function CoinCard({ coin }) {
-  const theme = useTheme();
-
   const priceChangeColor =
     coin.price_change_percentage_24h >= 0 ? "success.main" : "error.main";
 
   return (
-    <Box component={Link} to={`/coin/${coin.id}`} sx={{ textDecoration: "none" }}>
+    <Box
+      component={Link}
+      to={`/coin/${coin.id}`}
+      sx={{ textDecoration: "none", display: "block", height: "100%" }}
+    >
       <Card
         sx={{
-          minWidth: 250,
-          maxWidth: 250,
+          width: 300, // uniform width
+          height: 200, // fixed height for consistency
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
           borderRadius: 3,
           boxShadow: 3,
           transition: "0.3s",
@@ -28,8 +28,18 @@ export default function CoinCard({ coin }) {
           },
         }}
       >
-        <CardContent>
-          <Typography variant="h6" fontWeight="bold">
+        <CardContent sx={{ overflow: "hidden" }}>
+          <Typography
+            variant="h6"
+            fontWeight="bold"
+            noWrap
+            sx={{
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap",
+              maxWidth: "100%",
+            }}
+          >
             {coin.name} ({coin.symbol.toUpperCase()})
           </Typography>
 

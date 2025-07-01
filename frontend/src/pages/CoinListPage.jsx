@@ -8,15 +8,37 @@ import {
   Container,
   Grid,
   Stack,
+  CircularProgress,
 } from "@mui/material";
+import { useSnackbar } from "notistack";
 
 function CoinListPage() {
   const [coins, setCoins] = useState([]);
   const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
-    getCoinList(page).then((data) => setCoins(data));
-  }, [page]);
+    const fetchCoins = async () => {
+      setLoading(true);
+      try {
+        const data = await getCoinList(page);
+        setCoins(data);
+      } catch (err) {
+        console.error("Failed to fetch coins:", err);
+        const message =
+          err.response?.status === 429
+            ? "Too many requests – please wait and try again."
+            : "An error occurred while fetching coins.";
+        enqueueSnackbar(message, { variant: "error" });
+        setCoins([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCoins();
+  }, [page, enqueueSnackbar]);
 
   return (
     <Box sx={{ minHeight: "100vh", bgcolor: "background.default", py: 6 }}>
@@ -25,8 +47,13 @@ function CoinListPage() {
           Top Coins
         </Typography>
 
-        {/* Grid layout: 4 cards per row on md+, 2 on sm, 1 on xs */}
-        <Grid container spacing={3} justifyContent="center" mt={3}>
+        {loading && (
+          <Stack alignItems="center" my={4}>
+            <CircularProgress />
+          </Stack>
+        )}
+
+        <Grid container spacing={3} alignItems="stretch" justifyContent="center" mt={3}>
           {coins.map((coin) => (
             <Grid item key={coin.id} xs={12} sm={6} md={3}>
               <CoinCard coin={coin} />
@@ -34,17 +61,18 @@ function CoinListPage() {
           ))}
         </Grid>
 
-        {/* Pagination */}
         <Stack direction="row" spacing={2} justifyContent="center" mt={5}>
           <Button
             variant="contained"
             onClick={() => setPage((p) => Math.max(p - 1, 1))}
+            disabled={loading}
           >
             Prev
           </Button>
           <Button
             variant="contained"
             onClick={() => setPage((p) => p + 1)}
+            disabled={loading}
           >
             Next
           </Button>

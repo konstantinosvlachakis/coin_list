@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import getCoinDetails from "../api/getCoinDetails";
 
+// Show the details of a specific coin, including its name, description, current price, and price changes over various periods.
 function CoinDetailPage() {
   const { id } = useParams();
   const navigate = useNavigate();
