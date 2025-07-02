@@ -31,6 +31,7 @@ npm install
 ```
 
 #### Install Backend Dependencies
+
 Create a virtual environment in a folder by opening a terminal and navigating into a folder and then
 
 ```bash
@@ -40,7 +41,6 @@ cd name_of_venv\Scripts
 ```
 
 Then you go back to the backend folder from the same terminal and hit pip install -r requirements.txt
-
 
 ### Running the App
 
@@ -63,7 +63,7 @@ The app will be available at [http://localhost:5173](http://localhost:5173).
 
 ## Project Structure
 
-```
+```bash
 coin_list/
 ├── backend/
 ├── frontend/
@@ -75,7 +75,6 @@ coin_list/
 │   │   └── index.js
 │   └── README.md
 ```
-
 
 ## License
 
